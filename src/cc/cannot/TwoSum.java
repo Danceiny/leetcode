@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by haochen on 2017/6/25.
+ * Created by Danceiny on 2017/6/25.
  * Given nums = [2, 7, 11, 15], target = 9,
 
  Because nums[0] + nums[1] = 2 + 7 = 9,

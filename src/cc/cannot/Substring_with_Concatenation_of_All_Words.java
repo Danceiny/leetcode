@@ -7,6 +7,14 @@ import java.util.Map;
 
 /**
  * Created by Danceiny on 2017/6/25.
+ * You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.
+
+ For example, given:
+ s: "barfoothefoobarman"
+ words: ["foo", "bar"]
+
+ You should return the indices: [0,9].
+ (order does not matter).
  */
 public class Substring_with_Concatenation_of_All_Words {
     // travel all the words combinations to maintain a window
@@ -14,7 +22,7 @@ public class Substring_with_Concatenation_of_All_Words {
     // each time, n/wl words, mostly 2 times travel for each word
     // one left side of the window, the other right side of the window
     // so, time complexity O(wl * 2 * N/wl) = O(2N)
-    public static List<Integer> findSubstring(String S, List<String> L) {
+    public static List<Integer> findSubstring(String S, List<String> L) {   //标准的应该是String[] ……
         List<Integer> ans = new ArrayList<>();
         int n = S.length(), cnt = L.size();
         if (n <= 0 || cnt <= 0) return ans;
@@ -24,12 +32,12 @@ public class Substring_with_Concatenation_of_All_Words {
         for (int i = 0; i < cnt; ++i) dict.put(L.get(i),i);
 
         // travel all sub string combinations
-        int wl = L.get(0).length();
+        int wl = L.get(0).length();//   单词长度（单词的长度都是一样的）
         for (int i = 0; i < wl; ++i) {
             int left = i, count = 0;
             Map<String, Integer> tdict = new HashMap<>();
             for (int j = i; j <= n - wl; j += wl) {
-                String str = S.substring(j, j+wl);
+                String str = S.substring(j, j+wl);  //java的String.substring和c++的string.substr第二个参数不一致，前者是end-index,后者是截取长度。
                 // a valid word, accumulate results
                 if (dict.containsKey(str)) {
                     if(tdict.containsKey(str))
