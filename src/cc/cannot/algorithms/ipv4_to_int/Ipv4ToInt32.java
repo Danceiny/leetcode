@@ -274,6 +274,27 @@ public class Ipv4ToInt32 {
         test_sol(2);
         long start, end;
 
+        // 1,0000,0000 times calculation of correct ip input, cost about 3000ms
+        // Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
+        // processor	: 5
+        // vendor_id	: GenuineIntel
+        // cpu family	: 6
+        // model		: 142
+        // model name	: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
+        // stepping	: 10
+        // microcode	: 0x84
+        // cpu MHz		: 3225.984
+        // cache size	: 8192 KB
+        // physical id	: 0
+        // siblings	: 8
+        // core id		: 1
+        // cpu cores	: 2
+        // apicid		: 3
+        // initial apicid	: 3
+        // fpu		: yes
+        // fpu_exception	: yes
+        // cpuid level	: 22
+        // wp		: yes
         start = System.currentTimeMillis();
         for (int i = 0; i < 100000000; i++) {
             sol_v1("192.168.1.13");
@@ -288,6 +309,8 @@ public class Ipv4ToInt32 {
         end = System.currentTimeMillis();
         System.out.println(String.format("正向遍历算法耗时: %d ms", end - start));
 
+
+        // we using unit test to cover exception conditions, the two algorithms are still very close
         start = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             test_sol(2);
