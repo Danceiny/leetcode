@@ -152,7 +152,7 @@ public class Ipv4ToInt32 {
         String errmsg = ""; // detect error
 
         if (version == 1) {
-            System.out.println("测试逆向遍历算法");
+            // System.out.println("测试逆向遍历算法");
             ip = "172.168.5.1";
             a = sol_v1(ip);
             assert unsignedintToLong(a) == 2896692481L;
@@ -210,7 +210,7 @@ public class Ipv4ToInt32 {
 
         } else if (version == 2) {
             ip = "172.168.5.1\0";
-            System.out.println("测试正向遍历算法");
+            // System.out.println("测试正向遍历算法");
             a = sol_v2(ip);
             assert unsignedintToLong(a) == 2896692481L;
             ip = "172 . 168.5.1\0";
@@ -272,5 +272,48 @@ public class Ipv4ToInt32 {
         test_sol(1);
 
         test_sol(2);
+        long start, end;
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000000; i++) {
+            sol_v1("192.168.1.13");
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("逆向遍历算法耗时: %d ms", end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000000; i++) {
+            sol_v2("192.168.1.13\0");
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("正向遍历算法耗时: %d ms", end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            test_sol(2);
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("正向遍历算法耗时: %d ms", end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            test_sol(1);
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("逆向遍历算法耗时: %d ms", end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            test_sol(2);
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("正向遍历算法耗时: %d ms", end - start));
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            test_sol(1);
+        }
+        end = System.currentTimeMillis();
+        System.out.println(String.format("逆向遍历算法耗时: %d ms", end - start));
     }
 }
